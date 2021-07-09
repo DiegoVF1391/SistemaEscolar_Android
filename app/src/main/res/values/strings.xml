@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TAP_U4_Proyecto</string>
 
-    <string name="wsM">http://192.168.1.10:80/my_sge/</string>
+    <string name="wsM">http://192.168.1.10:443/my_sge/</string>
 
     <string name="wsD">http://192.168.1.70:80/my_sge/</string>
 
