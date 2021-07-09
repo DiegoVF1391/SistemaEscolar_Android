@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TAP_U4_Proyecto"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".Datos"></activity>
+        <activity android:name=".Examen" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     println("Alumno: $jsonAlumno")
                 }
 
-            }.consumePost(this,url,params)
+            }.consumeGet(this,url,params)
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()

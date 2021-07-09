@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
             val nombre = editRegisterName.text.toString()
             val sem = editRegisterSemester.text.toString()
 
-            val url = "${resources.getString(R.string.wsM)}registro.php"
+            val url = "${resources.getString(R.string.wsM)}/registro.php"
 
             val params = HashMap<String,String>()
             params.put("ncontrol",usr)
@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-            }.consumePost(this,url,params)
+            }.consumeGet(this,url,params)
 
         }catch (e: Exception){
             e.printStackTrace()
