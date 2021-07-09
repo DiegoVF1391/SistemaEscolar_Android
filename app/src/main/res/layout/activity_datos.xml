@@ -7,33 +7,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".DatosActivity">
 
     <EditText
-        android:id="@+id/editLoginUsr"
+        android:id="@+id/editNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Usuario / No de Control" />
+        android:editable="false"
+        android:hint="Nombre: " />
 
     <EditText
-        android:id="@+id/editLoginPass"
+        android:id="@+id/editNoControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="Ingresa tu Contraseña"
-        android:inputType="textPassword"
-        android:password="true" />
+        android:editable="false"
+        android:hint="No. de Control: " />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:text="Acceder"
-        android:layout_marginTop="15dp"
+    <EditText
+        android:id="@+id/editSemestre"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:hint="Semestre: "/>
+
+    <EditText
+        android:id="@+id/editPass"
+        android:layout_marginTop="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nueva contraseña"/>
 
     <Button
-        android:id="@+id/btnRegister"
-        android:text="Registrar"
+        android:id="@+id/btnNueva"
+        android:text="Cambiar contraseña"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
