@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:backgroundTint="#4CAF50"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <EditText
@@ -26,16 +26,16 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:text="Acceder"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Acceder" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:text="Registrar"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Registrar" />
 
 </LinearLayout>

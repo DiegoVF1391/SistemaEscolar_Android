@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
             val usr = editLoginUsr.text.toString()
             val pass = editLoginPass.text.toString()
 
-            val url = "${resources.getString(R.string.wsM)}/acceso.php"
-            val urld = "${"http://192.168.1.70:80/my_sge/"}/acceso.php"
+            val url = "${resources.getString(R.string.wsm)}/acceso.php"
+            //val urld = "${"http://192.168.1.70:80/my_sge/"}/acceso.php"
 
             val params = HashMap<String,String>()
             params.put("usr",usr)
@@ -64,14 +64,14 @@ class MainActivity : AppCompatActivity() {
 
                     val jsonAlumno = output.getJSONObject(0)
 
-                   /* val alumno = Alumno(
+                   val alumno = Alumno(
                         jsonAlumno.getInt("id"),
                         jsonAlumno.getString("n_control"),
                         jsonAlumno.getString("contrasenia"),
                         jsonAlumno.getString("nombre"),
                         jsonAlumno.getInt("semestre")
-                    )*/
-                    val alumno = Gson().fromJson(jsonAlumno.toString(),Alumno::class.java)
+                    )
+                    //val alumno = Gson().fromJson(jsonAlumno.toString(),Alumno::class.java)
 
                     val intent = Intent(this@MainActivity, MenuActivity::class.java)
                     intent.putExtra("alumno",alumno)

@@ -10,8 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TAP_U4_Proyecto"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.TAP_U4_Proyecto">
         <activity android:name=".DatosActivity"></activity>
         <activity android:name=".ExamenActivity" />
         <activity android:name=".RegisterActivity" />
