@@ -57,8 +57,8 @@ class RegisterActivity : AppCompatActivity() {
             val nombre = editRegisterName.text.toString()
             val sem = editRegisterSemester.text.toString()
 
-            val url = "${resources.getString(R.string.wsm)}registro.php"
-            val urld = "${"http://192.168.1.70:80/my_sge/"}/registro.php"
+            val url = "${resources.getString(R.string.wsm)}/registro.php"
+            //val urld = "${"http://192.168.1.70:80/my_sge/"}/registro.php"
 
             val params = HashMap<String,String>()
             params.put("ncontrol",usr)
