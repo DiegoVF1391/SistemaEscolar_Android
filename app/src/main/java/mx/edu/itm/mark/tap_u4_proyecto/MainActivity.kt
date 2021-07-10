@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.gson.Gson
 import mx.edu.itm.mark.tap_u4_proyecto.models.Alumno
 import mx.edu.itm.mark.tap_u4_proyecto.utils.MyUtils
 import org.json.JSONObject
@@ -65,12 +64,11 @@ class MainActivity : AppCompatActivity() {
                     val jsonAlumno = output.getJSONObject(0)
 
                    val alumno = Alumno(
-                        jsonAlumno.getInt("id"),
-                        jsonAlumno.getString("n_control"),
-                        jsonAlumno.getString("contrasenia"),
-                        jsonAlumno.getString("nombre"),
-                        jsonAlumno.getInt("semestre")
-                    )
+                       jsonAlumno.getInt("id"),
+                       jsonAlumno.getString("n_control"),
+                       jsonAlumno.getString("nombre"),
+                       jsonAlumno.getInt("semestre")
+                   )
                     //val alumno = Gson().fromJson(jsonAlumno.toString(),Alumno::class.java)
 
                     val intent = Intent(this@MainActivity, MenuActivity::class.java)

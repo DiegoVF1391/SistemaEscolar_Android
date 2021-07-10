@@ -9,10 +9,21 @@
     android:gravity="center"
     tools:context=".MenuActivity">
 
+    <TextView
+        android:id="@+id/textSaludo"
+        android:layout_marginBottom="70dp"
+        android:text="Bienvenido: "
+        android:textStyle="bold|italic"
+        android:textColor="@color/purple_700"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btnDatos"
         android:text="Datos del Alumno"
         android:layout_marginTop="15dp"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -20,6 +31,7 @@
         android:id="@+id/btnExamen"
         android:text="Realizar Examen"
         android:layout_marginTop="15dp"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
