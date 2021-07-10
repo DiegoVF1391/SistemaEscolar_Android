@@ -9,6 +9,16 @@
     android:gravity="center"
     tools:context=".DatosActivity">
 
+    <TextView
+        android:id="@+id/textDatos"
+        android:text="Datos del Alumno: "
+        android:layout_marginBottom="120dp"
+        android:textSize="30dp"
+        android:textColor="@color/purple_500"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/editNombre"
         android:layout_width="wrap_content"
