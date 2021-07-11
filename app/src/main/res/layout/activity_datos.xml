@@ -19,32 +19,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <EditText
+    <TextView
         android:id="@+id/editNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:editable="false"
-        android:hint="Nombre: " />
+        android:textSize="20dp"
+        android:layout_margin="30dp"
+        android:text="Nombre: " />
 
-    <EditText
+    <TextView
         android:id="@+id/editNoControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:editable="false"
-        android:hint="No. de Control: " />
+        android:textSize="20dp"
+        android:layout_margin="30dp"
+        android:text="No de Control: "/>
 
-    <EditText
+    <TextView
         android:id="@+id/editSemestre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:editable="false"
-        android:hint="Semestre: "/>
+        android:textSize="20dp"
+        android:layout_margin="30dp"
+        android:text="Semestre: "/>
 
     <EditText
         android:id="@+id/editPass"
         android:layout_marginTop="45dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:hint="Nueva contraseña"/>
 
     <Button

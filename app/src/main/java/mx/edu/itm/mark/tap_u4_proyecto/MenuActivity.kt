@@ -11,6 +11,7 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var btnDatos: Button
     private lateinit var btnExamen: Button
+    private lateinit var btnCalificaciones: Button
     private lateinit var textSaludo: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,25 +24,40 @@ class MenuActivity : AppCompatActivity() {
 
         btnDatos = findViewById(R.id.btnDatos)
         btnExamen = findViewById(R.id.btnExamen)
+        btnCalificaciones = findViewById(R.id.btnCalificaciones)
+
         textSaludo = findViewById(R.id.textSaludo)
 
           //Saludar alumno ... OBTENER EL ATRIBUTO NOMBRE NADAMAS
-        val nombresito = alumno
+        val nombresito  = alumno as Alumno
+        val nombresote = alumno.nombre
 
-        textSaludo.text= "Bienvenido: $nombresito"
+        textSaludo.text= "Bienvenido: $nombresote"
 
 
         btnDatos.setOnClickListener{
             val intent = Intent(this, DatosActivity::class.java)
-            startActivity(intent)
             //mandando el objeto con los datos del alumno al activity datos
             intent.putExtra("alumno",alumno)
+
+            startActivity(intent)
         }
 
         btnExamen.setOnClickListener{
             val intent = Intent(this, ExamenActivity::class.java)
             startActivity(intent)
         }
+
+        btnCalificaciones.setOnClickListener {
+            val intent = Intent(this, CalificacionesActivity::class.java)
+            //mandando el objeto con los datos del alumno al activity datos
+            intent.putExtra("alumno",alumno)
+
+            startActivity(intent)
+
+        }
+
+
     }
 
 
