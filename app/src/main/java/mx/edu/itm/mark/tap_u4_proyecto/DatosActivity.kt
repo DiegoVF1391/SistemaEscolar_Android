@@ -55,7 +55,7 @@ class DatosActivity : AppCompatActivity() {
         }
         else
         {
-            val url = "${resources.getString(R.string.wsm)}/newPass.php"
+            val url = "${resources.getString(R.string.wsd)}/newPass.php"
 
 
             val alumno = intent.getSerializableExtra("alumno")

@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             val usr = editLoginUsr.text.toString()
             val pass = editLoginPass.text.toString()
 
-            val url = "${resources.getString(R.string.wsm)}/acceso.php"
+            val url = "${resources.getString(R.string.wsd)}/acceso.php"
             //val urld = "${"http://192.168.1.70:80/my_sge/"}/acceso.php"
 
             val params = HashMap<String,String>()
