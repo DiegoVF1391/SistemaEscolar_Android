@@ -1,13 +1,13 @@
 package mx.edu.itm.mark.tap_u4_proyecto
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import mx.edu.itm.mark.tap_u4_proyecto.utils.MyUtils
 import org.json.JSONObject
-import java.lang.Exception
+
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -17,6 +17,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editRegisterSemester: EditText
     private lateinit var btnRegisterSave: Button
     private lateinit var btnRegisterCancel: Button
+
+    private val MY_TIMEOUT = 5000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +53,15 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        try {
-            val usr = editRegisterUsr.text.toString()
-            val pass = editRegisterPass.text.toString()
-            val nombre = editRegisterName.text.toString()
-            val sem = editRegisterSemester.text.toString()
+        val usr = editRegisterUsr.text.toString()
+        val pass = editRegisterPass.text.toString()
+        val nombre = editRegisterName.text.toString()
+        val sem = editRegisterSemester.text.toString()
 
-            val url = "${resources.getString(R.string.wsd)}/registro.php"
-            //val urld = "${"http://192.168.1.70:80/my_sge/"}/registro.php"
+      /* try {  //ESTE FUNCIONA
+
+
+            val url = "${resources.getString(R.string.wsm)}/registro.php"
 
             val params = HashMap<String,String>()
             params.put("ncontrol",usr)
@@ -75,7 +78,7 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this@RegisterActivity,
                             "Se registro correctamente",
                         Toast.LENGTH_LONG).show()
-                        finish()
+                        println("Registrado correctamente")
                     }
                 }
             }.consumePost(this,url,params)
@@ -83,6 +86,42 @@ class RegisterActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
+        }*/
+
+
+        try {
+            /*//Ponemos a "Dormir" el programa durante los ms que queremos
+            Thread.sleep((6 * 1000).toLong())
+            println("Aguanta....")*/
+                                                 //CORREGIR
+            val url2 = "${resources.getString(R.string.wsm)}/asignar.php?usr=$usr&sem=$sem"
+
+           /* val params2 = HashMap<String,String>()
+            params2.put("usr",usr)
+            params2.put("sem",sem)*/
+
+            object: MyUtils(){
+                override fun formatResponse(response: String) {
+                    //val json = JSONObject(response)
+                    //val output = json.getJSONArray("output")
+
+                    /*if(output.getString(0).equals("Ok")){
+                        Toast.makeText(this@RegisterActivity,
+                            "Se asigno correctamente",
+                            Toast.LENGTH_LONG).show()
+                        println("Asignado correctamente")
+                    }*/
+                    print(response)
+                }
+            }.consumeGet(this,url2)
+
+        }catch (e: Exception){
+            e.printStackTrace()
+            Toast.makeText(this,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    private fun registrarMaterias(){
     }
 }
