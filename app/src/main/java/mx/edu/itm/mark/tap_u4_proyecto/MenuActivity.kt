@@ -16,6 +16,7 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        //
 
         //Obtener datos del alumno desde activity anterior..
         val alumno = intent.getSerializableExtra("alumno")
