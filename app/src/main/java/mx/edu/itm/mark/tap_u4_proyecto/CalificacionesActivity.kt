@@ -14,6 +14,7 @@ class CalificacionesActivity : AppCompatActivity() {
 
     private lateinit var textCalificaciones: TextView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calificaciones)
@@ -48,7 +49,9 @@ class CalificacionesActivity : AppCompatActivity() {
                     val json = JSONObject(response)
                     val output = json.getJSONArray("output")
                     println(output)
-                                                                       //Mostrar estos datos en aplicacion
+                                                 //Mostrar estos datos en aplicacion
+
+
 
                 }
 

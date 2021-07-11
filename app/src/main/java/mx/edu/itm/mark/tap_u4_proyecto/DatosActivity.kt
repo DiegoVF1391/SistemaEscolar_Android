@@ -70,12 +70,24 @@ class DatosActivity : AppCompatActivity() {
 
                 object: MyUtils() {
                     override fun formatResponse(response: String) {
-                       // val json = JSONObject(response)
-                       // val output = json.getJSONArray("output")
+                        val json = JSONObject(response)
+                        val output = json.getJSONArray("output")
 
-                        println(response)
+                        if(output.getString(0).equals("Ok")){
+                            Toast.makeText(this@DatosActivity,
+                                "Se registro correctamente",
+                                Toast.LENGTH_LONG).show()
+                            println("Cambiada correctamente")
+                            println(response)
+                        }else{
+                            println("No se cambio")
+                            println(response)
+
+                        }
                     }
                 }.consumePost(this,url,params)
+                Toast.makeText(this,"Cambiada correctamente", Toast.LENGTH_LONG).show()
+
             }catch (e: Exception){
                 e.printStackTrace()
                 Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()

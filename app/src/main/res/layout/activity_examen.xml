@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ExamenActivity">
 
+    <TextView
+        android:id="@+id/textExamen"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="20dp"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+
 </LinearLayout>

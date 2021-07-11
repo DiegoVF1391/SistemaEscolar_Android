@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
+
         }
 
     }
