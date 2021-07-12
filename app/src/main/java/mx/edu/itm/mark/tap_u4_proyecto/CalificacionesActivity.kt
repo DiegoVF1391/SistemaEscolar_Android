@@ -39,7 +39,7 @@ class CalificacionesActivity : AppCompatActivity() {
             val alumnito = alumno as Alumno
             val usr = alumnito.id.toString()
 
-            val url = "${resources.getString(R.string.wsd)}/verCalif.php?usr=$usr"
+            val url = "${resources.getString(R.string.wsm)}/verCalif.php?usr=$usr"
 
             println("id: $usr")
 
@@ -52,6 +52,13 @@ class CalificacionesActivity : AppCompatActivity() {
                     val output = json.getJSONArray("output")
                     var salida = ""
                     println(output)
+
+                    for(i in 0..output.length()-1){
+                        val jMateria = output[i]
+                        println(jMateria.toString())
+
+                    }
+
                                                  //Mostrar estos datos en aplicacion
                     for(i in 0..output.length()-1){
                         var jMateria = JSONObject(output[i].toString())

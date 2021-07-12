@@ -70,7 +70,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
 
-        //recibir Materias
+       /* //recibir Materias
         try {
             val url = "${resources.getString(R.string.wsm)}/verCalif.php"
             val params = HashMap<String,String>()
@@ -96,7 +96,7 @@ class MenuActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
-        }
+        }*/
 
 
 

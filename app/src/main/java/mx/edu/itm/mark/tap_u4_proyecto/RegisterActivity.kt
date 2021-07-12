@@ -19,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var btnRegisterCancel: Button
 
     private val MY_TIMEOUT = 5000
+    private  var id: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,8 @@ class RegisterActivity : AppCompatActivity() {
         val nombre = editRegisterName.text.toString()
         val sem = editRegisterSemester.text.toString()
 
-      /* try {  //ESTE FUNCIONA
+
+       try {  //ESTE FUNCIONA
 
 
             val url = "${resources.getString(R.string.wsm)}/registro.php"
@@ -86,42 +88,69 @@ class RegisterActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
-        }*/
+        }
+
+        //VER ID DE ALUMNO
+        try {  //ESTE FUNCIONA
 
 
-        try {
-            /*//Ponemos a "Dormir" el programa durante los ms que queremos
-            Thread.sleep((6 * 1000).toLong())
-            println("Aguanta....")*/
-                                                 //CORREGIR
-            val url2 = "${resources.getString(R.string.wsm)}/asignar.php?usr=$usr&sem=$sem"
+            val url = "${resources.getString(R.string.wsm)}/verId.php?no=$usr"
 
-           /* val params2 = HashMap<String,String>()
-            params2.put("usr",usr)
-            params2.put("sem",sem)*/
+            //val params = HashMap<String,String>()
+            //params.put("no",usr)
 
             object: MyUtils(){
                 override fun formatResponse(response: String) {
-                    //val json = JSONObject(response)
-                    //val output = json.getJSONArray("output")
+                    val json = JSONObject(response)
+                    val output = json.getJSONArray("output")
 
-                    /*if(output.getString(0).equals("Ok")){
-                        Toast.makeText(this@RegisterActivity,
-                            "Se asigno correctamente",
-                            Toast.LENGTH_LONG).show()
-                        println("Asignado correctamente")
-                    }*/
-                    print(response)
+                    val jid = JSONObject(output[0].toString())
+                    val idd = jid.getString("id")
+                   println("Valor obtenido: $idd")
+
+                    //asignar materias
+                    try {
+
+                        val url2 = "${resources.getString(R.string.wsm)}/asignarA.php"
+                        println("url2: $url2")
+
+                        val params2 = HashMap<String,String>()
+                         params2.put("id",idd)
+                         params2.put("sem",sem)
+
+                        object: MyUtils(){
+                            override fun formatResponse(response: String) {
+                                //val json = JSONObject(response)
+                                //val output = json.getJSONArray("output")
+
+                                /*if(output.getString(0).equals("Ok")){
+                                    Toast.makeText(this@RegisterActivity,
+                                        "Se asigno correctamente",
+                                        Toast.LENGTH_LONG).show()
+                                    println("Asignado correctamente")
+                                }*/
+                                print(response)
+                                finish()
+                            }
+                        }.consumePost(this@RegisterActivity,url2,params2)
+
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                        Toast.makeText(this@RegisterActivity,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
+                    }
+
+
+
                 }
-            }.consumeGet(this,url2)
+            }.consumeGet(this,url)
 
         }catch (e: Exception){
             e.printStackTrace()
-            Toast.makeText(this,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
         }
 
     }
 
-    private fun registrarMaterias(){
+   private fun registrarMaterias(){
     }
 }
