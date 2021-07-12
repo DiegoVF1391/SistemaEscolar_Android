@@ -17,7 +17,7 @@ class ExamenActivity : AppCompatActivity() {
     private lateinit var textp: TextView
     private var cont = 0
     private  var numRespuestas:Int = 0
-    private  var idP:Int = 0
+    private  var idP:Int=0
     private  var cont2:Int = 0
     private var respuestaCorrecta =""
 
@@ -91,18 +91,20 @@ class ExamenActivity : AppCompatActivity() {
             object: MyUtils(){
                 override fun formatResponse(response: String) {
                     val json = JSONObject(response)
-                    output2 = json.getJSONArray("output")
-                    println(output2)
+                    output = json.getJSONArray("output")
+                    println(output)
                     //Mostrar estos datos en aplicacion
                     //val jPregunta = JSONObject(output[0].toString())
-                    for(i in 0..output2.length()-1){
-                        val jRespuesta= JSONObject(output2[i].toString())
+                    for(i in 0..output.length()-1){
+                        val jRespuesta= JSONObject(output[i].toString())
                         println(jRespuesta.getString("respuesta"))
                         println(jRespuesta.getString("id_pregunta"))
 
 
                         //verificar id de la pregunta
+                        println("idP: $idP y getId: ${jRespuesta.getString("id_pregunta").toInt()}")
                         if(idP == jRespuesta.getString("id_pregunta").toInt()){
+                            println("FUNCIONA ID")
                             respuestasT.add(jRespuesta.getString("respuesta"))
 
                         }
@@ -126,12 +128,13 @@ class ExamenActivity : AppCompatActivity() {
 
         btnSiguiente.setOnClickListener {
             cont++
-            revisar()
+            //revisar()
             pregunta()
+            println("JALAAAAAAAAAA")
 
-            if(spinnerRespuestas.getSelectedItem().toString() == respuestaCorrecta){
+            /*if(spinnerRespuestas.getSelectedItem().toString() == respuestaCorrecta){
                 numRespuestas+=10
-            }
+            }*/
         }
 
     }
@@ -150,6 +153,40 @@ class ExamenActivity : AppCompatActivity() {
             textp.text = "Pregunta ${cont+1} :"
             textPregunta.text = jPregunta.getString("pregunta")
             idP = jPregunta.getString("id").toInt()
+
+            //respuestas
+            try {
+                val url = "${resources.getString(R.string.wsm)}/pyr.php"
+
+                object: MyUtils(){
+                    override fun formatResponse(response: String) {
+                        val json = JSONObject(response)
+                        output = json.getJSONArray("output")
+                        println(output)
+                        //Mostrar estos datos en aplicacion
+                        //val jPregunta = JSONObject(output[0].toString())
+                        for(i in 0..output.length()-1){
+                            val jRespuesta= JSONObject(output[i].toString())
+                            println(jRespuesta.getString("respuesta"))
+                            println(jRespuesta.getString("id_pregunta"))
+
+
+                            //verificar id de la pregunta
+                            if(idP == jRespuesta.getString("id_pregunta").toInt()){
+                                respuestasT.add(jRespuesta.getString("respuesta"))
+                            }
+                        }
+                        println("Arregloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+                        println(respuestasT)
+                        spinnerRespuestas.adapter = ArrayAdapter(this@ExamenActivity, android.R.layout.simple_list_item_1, respuestasT)
+                    }
+
+                }.consumeGet(this,url)
+
+            }catch (e: Exception){
+                e.printStackTrace()
+                Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
+            }
 
         }else{
             finish()
