@@ -33,6 +33,7 @@ class MenuActivity : AppCompatActivity() {
         btnExamen = findViewById(R.id.btnExamen)
         btnCalificaciones = findViewById(R.id.btnCalificaciones)
         spinnerMaterias = findViewById(R.id.spinnerMaterias)
+        val materiaT: MutableList<String> = ArrayList()
 
         textSaludo = findViewById(R.id.textSaludo)
 
@@ -70,7 +71,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
 
-       /* //recibir Materias
+     //recibir Materias
         try {
             val url = "${resources.getString(R.string.wsm)}/verCalif.php"
             val params = HashMap<String,String>()
@@ -85,18 +86,23 @@ class MenuActivity : AppCompatActivity() {
                         var jmateria = JSONObject(output[i].toString())
                         println("Materia: ${jmateria.getString("nombre_materia")}")
                         //LLENAR SPINNER de materias
-                        //spinnerMaterias.addView(i) =jmateria.getString("nombre_materia")
+                        val a = jmateria.getString("nombre_materia").toString()
+                        materiaT.add(a)
 
                     }
-                   // println("Materias: $output")
+                    println("Materias: ${materiaT}")
+
                     //Mostrar estos datos en aplicacion
+
+                    //spinnerMaterias.
+
 
                 }
             }.consumePost(this,url,params)
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
-        }*/
+        }
 
 
 

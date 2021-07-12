@@ -69,7 +69,7 @@ class CalificacionesActivity : AppCompatActivity() {
                     textTodas.text = "$salida"
                 }
 
-            }.consumeGet(this,url, params)
+            }.consumePost(this,url, params)
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
