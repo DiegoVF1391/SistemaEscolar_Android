@@ -81,6 +81,69 @@ class RegisterActivity : AppCompatActivity() {
                             "Se registro correctamente",
                         Toast.LENGTH_LONG).show()
                         println("Registrado correctamente")
+
+                        // anidamiento
+                        //VER ID DE ALUMNO
+                        try {  //ESTE FUNCIONA
+
+
+                            val url = "${resources.getString(R.string.wsm)}/verId.php?no=$usr"
+
+                            /* val params = HashMap<String,String>()
+                             params.put("no",usr)*/
+
+                            object: MyUtils(){
+                                override fun formatResponse(response: String) {
+                                    val json = JSONObject(response)
+                                    val output = json.getJSONArray("output")
+
+                                    println("                                              Esto $response")
+
+                                    val jid = JSONObject(output[0].toString())
+                                    val idd = jid.getString("id")
+                                    // println("                                                        Valor obtenido: $idd")
+
+                                    //asignar materias
+                                    try {
+
+                                        val url2 = "${resources.getString(R.string.wsm)}/asignarA.php"
+                                        println("url2: $url2")
+
+                                        val params2 = HashMap<String,String>()
+                                        params2.put("id",idd)
+                                        params2.put("sem",sem)
+
+                                        object: MyUtils(){
+                                            override fun formatResponse(response: String) {
+                                                //val json = JSONObject(response)
+                                                //val output = json.getJSONArray("output")
+
+                                                /*if(output.getString(0).equals("Ok")){
+                                                    Toast.makeText(this@RegisterActivity,
+                                                        "Se asigno correctamente",
+                                                        Toast.LENGTH_LONG).show()
+                                                    println("Asignado correctamente")
+                                                }*/
+                                                print(response)
+                                                finish()
+                                            }
+                                        }.consumePost(this@RegisterActivity,url2,params2)
+
+                                    }catch (e: Exception){
+                                        e.printStackTrace()
+                                        Toast.makeText(this@RegisterActivity,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
+                                    }
+
+
+
+                                }
+                            }.consumeGet(this@RegisterActivity,url)
+
+                        }catch (e: Exception){
+                            e.printStackTrace()
+                            Toast.makeText(this@RegisterActivity,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
+                        }
+
                     }
                 }
             }.consumePost(this,url,params)
@@ -90,66 +153,6 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
         }
 
-        //VER ID DE ALUMNO
-        try {  //ESTE FUNCIONA
-
-
-            val url = "${resources.getString(R.string.wsm)}/verId.php?no=$usr"
-
-           /* val params = HashMap<String,String>()
-            params.put("no",usr)*/
-
-            object: MyUtils(){
-                override fun formatResponse(response: String) {
-                    val json = JSONObject(response)
-                    val output = json.getJSONArray("output")
-
-                    println("                                              Esto $response")
-
-                    //val jid = JSONObject(output[0].toString())
-                    //val idd = jid.getString("id")
-                  // println("                                                        Valor obtenido: $idd")
-
-                    //asignar materias
-                   /* try {
-
-                        val url2 = "${resources.getString(R.string.wsm)}/asignarA.php"
-                        println("url2: $url2")
-
-                        val params2 = HashMap<String,String>()
-                         params2.put("id",idd)
-                         params2.put("sem",sem)
-
-                        object: MyUtils(){
-                            override fun formatResponse(response: String) {
-                                //val json = JSONObject(response)
-                                //val output = json.getJSONArray("output")
-
-                                /*if(output.getString(0).equals("Ok")){
-                                    Toast.makeText(this@RegisterActivity,
-                                        "Se asigno correctamente",
-                                        Toast.LENGTH_LONG).show()
-                                    println("Asignado correctamente")
-                                }*/
-                                print(response)
-                                finish()
-                            }
-                        }.consumePost(this@RegisterActivity,url2,params2)
-
-                    }catch (e: Exception){
-                        e.printStackTrace()
-                        Toast.makeText(this@RegisterActivity,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
-                    }*/
-
-
-
-                }
-            }.consumeGet(this,url)
-
-        }catch (e: Exception){
-            e.printStackTrace()
-            Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
-        }
 
     }
 
