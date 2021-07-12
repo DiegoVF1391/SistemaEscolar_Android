@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import mx.edu.itm.mark.tap_u4_proyecto.models.Alumno
 import mx.edu.itm.mark.tap_u4_proyecto.utils.MyUtils
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 class ExamenActivity : AppCompatActivity() {
@@ -156,18 +157,23 @@ class ExamenActivity : AppCompatActivity() {
 
 
         btnSiguiente.setOnClickListener {
-            cont++
-            //revisar()
-            pregunta()
-            println("JALAAAAAAAAAA")
-            println("  correct:                              $respuestaCorrecta       ")
-            println("  elegida                                    $elegida")
+            if (cont < 10) {
+                cont++
+                pregunta()
+                println("JALAAAAAAAAAA")
+                println("  correct:                              $respuestaCorrecta       ")
+                println("  elegida                                    $elegida")
 
 
-            if(elegida == respuestaCorrecta.toString()){
-                numRespuestas+=10
+                if (elegida == respuestaCorrecta.toString()) {
+                    numRespuestas += 10
+                }
+                println("Correctas                        $numRespuestas")
             }
-            println("Correctas                        $numRespuestas")
+            else
+            {
+                revisar()
+            }
         }
 
     }
@@ -270,6 +276,9 @@ class ExamenActivity : AppCompatActivity() {
 
 
         }else{
+            Toast.makeText(this,"Su calificacion: ${numRespuestas+10}", Toast.LENGTH_LONG).show()
+
+            revisar()
             finish()
             println("                                             $numRespuestas")
 
@@ -285,47 +294,73 @@ class ExamenActivity : AppCompatActivity() {
 
 
     private fun revisar(){
-        println(                        "JALA revisar")
 
-        /*for(i in 0..output.length()-1){
-            var re= JSONObject(output[i].toString())
-            var valor =  re.getString("respuesta")*/
-
-        //respuestas
+        //Obtener el id de materia
         try {
-            val url = "${resources.getString(R.string.wsm)}/pyr.php"
+            //Obtener datos del alumno desde activity anterior..
+            materia1 = intent.getStringExtra("materia1").toString()
+
+            val url = "${resources.getString(R.string.wsm)}/verIDM.php"
+
+            val params = HashMap<String,String>()
+            params.put("nombre",materia1)
+
 
             object: MyUtils(){
                 override fun formatResponse(response: String) {
                     val json = JSONObject(response)
-                    output = json.getJSONArray("output")
-                    println(output)
-                    //Mostrar estos datos en aplicacion
-                    //val jPregunta = JSONObject(output[0].toString())
-                    for(i in 0..output.length()-1){
-                        val jRespuesta= JSONObject(output[i].toString())
-                        println(jRespuesta.getString("respuesta"))
-                        println(jRespuesta.getString("id_pregunta"))
-                        println("Correcta:                                                ${jRespuesta.getString("correcta")}")
+
+                    val output2 = json.getJSONArray("output")
+                    val jId = JSONObject(output2[0].toString())
+                    var idm = jId.getString("id")
+                    println("                          EL ID DE MATERIA: $idm")
 
 
-                        //verificar id de la pregunta
-                        if(idP == jRespuesta.getString("id_pregunta").toInt()){
-                            respuestasT.add(jRespuesta.getString("respuesta"))
 
-                        }
+                    //anidar otro ws
+                    try {
+                        //Obtener datos del alumno desde activity anterior..
+                        val alumno = intent.getSerializableExtra("alumno")
+
+                        val alumnito = alumno as Alumno
+                        val id = alumnito.id.toString()
+
+
+
+
+                        val url = "${resources.getString(R.string.wsm)}/calificar.php"
+
+                        val params = HashMap<String,String>()
+                        params.put("usr",id)
+                        params.put("materia",idm)
+                        params.put("calif",numRespuestas.toString())
+
+                        object: MyUtils(){
+                            override fun formatResponse(response: String) {
+                                //val json = JSONObject(response)
+
+                                println(response)
+                            }
+
+                        }.consumePost(this@ExamenActivity,url,params)
+
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                        Toast.makeText(this@ExamenActivity,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
                     }
-                    println("Arregloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-                    println(respuestasT)
-                    spinnerRespuestas.adapter = ArrayAdapter(this@ExamenActivity, android.R.layout.simple_list_item_1, respuestasT)
+
+
+
                 }
 
-            }.consumeGet(this,url)
+            }.consumePost(this,url,params)
 
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
         }
+
+
 
 
            /* if(valor == spinnerRespuestas.getSelectedItem().toString()){
