@@ -96,20 +96,22 @@ class RegisterActivity : AppCompatActivity() {
 
             val url = "${resources.getString(R.string.wsm)}/verId.php?no=$usr"
 
-            //val params = HashMap<String,String>()
-            //params.put("no",usr)
+           /* val params = HashMap<String,String>()
+            params.put("no",usr)*/
 
             object: MyUtils(){
                 override fun formatResponse(response: String) {
                     val json = JSONObject(response)
                     val output = json.getJSONArray("output")
 
-                    val jid = JSONObject(output[0].toString())
-                    val idd = jid.getString("id")
-                   println("Valor obtenido: $idd")
+                    println("                                              Esto $response")
+
+                    //val jid = JSONObject(output[0].toString())
+                    //val idd = jid.getString("id")
+                  // println("                                                        Valor obtenido: $idd")
 
                     //asignar materias
-                    try {
+                   /* try {
 
                         val url2 = "${resources.getString(R.string.wsm)}/asignarA.php"
                         println("url2: $url2")
@@ -137,7 +139,7 @@ class RegisterActivity : AppCompatActivity() {
                     }catch (e: Exception){
                         e.printStackTrace()
                         Toast.makeText(this@RegisterActivity,"Error al asignar, intente mas tarde", Toast.LENGTH_LONG).show()
-                    }
+                    }*/
 
 
 
@@ -151,6 +153,4 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-   private fun registrarMaterias(){
-    }
 }
