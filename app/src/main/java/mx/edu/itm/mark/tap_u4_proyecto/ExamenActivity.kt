@@ -18,10 +18,12 @@ class ExamenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_examen)
 
         textExamen = findViewById(R.id.textExamen)
-        textExamen.text = "Examen de:"
 
         //Obtener datos del alumno desde activity anterior..
         val alumno = intent.getSerializableExtra("alumno")
+        val materia1 = intent.getStringExtra("materia1")
+
+        textExamen.text = "Examen de: $materia1"
 
         val alumnito = alumno as Alumno
         val semestre = alumnito.semestre.toString()

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.core.view.get
 import mx.edu.itm.mark.tap_u4_proyecto.models.Alumno
 import mx.edu.itm.mark.tap_u4_proyecto.utils.MyUtils
 import org.json.JSONObject
@@ -22,6 +23,7 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         //
+        val spinnerMaterias = findViewById<Spinner>(R.id.spinnerMaterias)
 
         //Obtener datos del alumno desde activity anterior..
         val alumno = intent.getSerializableExtra("alumno")
@@ -50,13 +52,6 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnExamen.setOnClickListener{
-            val intent = Intent(this, ExamenActivity::class.java)
-            //mandando el objeto con los datos del alumno al activity datos
-            intent.putExtra("alumno",alumno)
-
-            startActivity(intent)
-        }
 
         btnCalificaciones.setOnClickListener {
             val intent = Intent(this, CalificacionesActivity::class.java)
@@ -91,8 +86,22 @@ class MenuActivity : AppCompatActivity() {
 
                     //Mostrar estos datos en aplicacion
                     //spinnerMaterias.
-                    val spinnerMaterias = findViewById<Spinner>(R.id.spinnerMaterias)
+
                     spinnerMaterias.adapter = ArrayAdapter(this@MenuActivity, android.R.layout.simple_list_item_1, materiaT)
+
+
+
+                    //Mandar datos al EXAMEN
+                    btnExamen.setOnClickListener{
+                        var materia1 = spinnerMaterias.getSelectedItem().toString()
+                        println("MATERIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: $materia1")
+
+                        val intent = Intent(this@MenuActivity, ExamenActivity::class.java)
+                        //mandando el objeto con los datos del alumno al activity datos
+                        intent.putExtra("alumno",alumno)
+                        intent.putExtra("materia1",materia1)
+                        startActivity(intent)
+                    }
 
 
                 }
@@ -101,6 +110,7 @@ class MenuActivity : AppCompatActivity() {
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
         }
+
 
 
 
