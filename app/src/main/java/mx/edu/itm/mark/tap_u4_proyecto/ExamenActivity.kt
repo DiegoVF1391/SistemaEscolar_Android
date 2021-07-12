@@ -24,18 +24,19 @@ class ExamenActivity : AppCompatActivity() {
         val alumno = intent.getSerializableExtra("alumno")
 
         val alumnito = alumno as Alumno
-        val semestre = alumnito.semestre
+        val semestre = alumnito.semestre.toString()
 
         //Recibir preguntas
         //recibir calificaciones
 
         try {
-            val url = "${resources.getString(R.string.wsm)}/examenes.php"
+            val url = "${resources.getString(R.string.wsm)}/preguntas.php"
 
             println("semestre: $semestre")
 
-            /*val params = HashMap<String,String>()
-            params.put("usr",usr)*/
+            val params = HashMap<String,String>()
+            params.put("materia","Programacion I")
+            params.put("semestre",semestre)
 
             object: MyUtils(){
                 override fun formatResponse(response: String) {
@@ -46,7 +47,7 @@ class ExamenActivity : AppCompatActivity() {
 
                 }
 
-            }.consumeGet(this,url)
+            }.consumePost(this,url,params)
         }catch (e: Exception){
             e.printStackTrace()
             Toast.makeText(this,"Error, intente mas tarde", Toast.LENGTH_LONG).show()
