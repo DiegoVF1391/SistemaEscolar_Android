@@ -3,10 +3,7 @@ package mx.edu.itm.mark.tap_u4_proyecto
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import mx.edu.itm.mark.tap_u4_proyecto.models.Alumno
 import mx.edu.itm.mark.tap_u4_proyecto.utils.MyUtils
 import org.json.JSONObject
@@ -18,7 +15,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var btnExamen: Button
     private lateinit var btnCalificaciones: Button
     private lateinit var textSaludo: TextView
-    private lateinit var spinnerMaterias: Spinner
+    //private lateinit var spinnerMaterias: Spinner
     private lateinit var materia: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +29,8 @@ class MenuActivity : AppCompatActivity() {
         btnDatos = findViewById(R.id.btnDatos)
         btnExamen = findViewById(R.id.btnExamen)
         btnCalificaciones = findViewById(R.id.btnCalificaciones)
-        spinnerMaterias = findViewById(R.id.spinnerMaterias)
-        val materiaT: MutableList<String> = ArrayList()
+       // val materiaT: MutableList<String> = ArrayList()
+        val materiaT = ArrayList<String>()
 
         textSaludo = findViewById(R.id.textSaludo)
 
@@ -93,8 +90,9 @@ class MenuActivity : AppCompatActivity() {
                     println("Materias: ${materiaT}")
 
                     //Mostrar estos datos en aplicacion
-
                     //spinnerMaterias.
+                    val spinnerMaterias = findViewById<Spinner>(R.id.spinnerMaterias)
+                    spinnerMaterias.adapter = ArrayAdapter(this@MenuActivity, android.R.layout.simple_list_item_1, materiaT)
 
 
                 }
